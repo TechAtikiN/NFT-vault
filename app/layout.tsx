@@ -1,4 +1,5 @@
 // named exporta
+import { ThirdWebProvider } from './providers'
 
 // default exports
 import './globals.css'
@@ -15,7 +16,11 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
-      <body>{children}</body>
+      <body>
+        <ThirdWebProvider>
+          {children}
+        </ThirdWebProvider>
+      </body>
     </html>
   )
 }

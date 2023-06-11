@@ -4,7 +4,7 @@
 
 @layer components{
   .nav-link{
-    @apply text-gray-300 hover:text-gray-100 hover:font-semibold hover:cursor-pointer;
+    @apply text-gray-400 hover:text-gray-100 font-semibold hover:font-bold hover:cursor-pointer;
   }
 
   .sign-in{
