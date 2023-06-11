@@ -1,3 +1,13 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+@layer components{
+  .nav-link{
+    @apply text-gray-300 hover:text-gray-100 hover:font-semibold hover:cursor-pointer;
+  }
+
+  .sign-in{
+    @apply text-white bg-red-500 border border-white hover:bg-red-600 px-4 py-3 rounded-full w-1/6 font-bold hover:text-white
+  }
+}
