@@ -10,4 +10,8 @@
   .sign-in{
     @apply text-white bg-red-500 border border-white hover:bg-red-600 px-4 py-3 rounded-full w-1/6 font-bold hover:text-white
   }
+
+  .claim{
+    @apply text-yellow-500 text-center text-xl mx-auto my-10 font-bold
+  }
 }

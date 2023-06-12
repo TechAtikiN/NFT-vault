@@ -13,9 +13,7 @@ export default function RootLayout({
 }) {
   return (
     <html lang='en'>
-      <body
-        className='bg-gradient-to-tl from-[#2C3639] to-black text-white md:max-w-7xl mx-auto max-w-3xl'
-      >
+      <body>
         {children}
       </body>
     </html>

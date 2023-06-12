@@ -1,6 +1,17 @@
+import { getNFT, urlFor } from '@/sanity/sanity-utils'
+
+import ClaimAndMint from '@/components/ClaimAndMint'
 import Navbar from '@/components/global/Navbar'
 
-const NFTDropPage = () => {
+type Props = {
+  params: {
+    id: string
+  }
+}
+
+const NFTDropPage = async ({ params }: Props) => {
+  const slug = params.id
+  const nft: Collection = await getNFT(slug)
 
   return (
     <div className=''>
@@ -13,16 +24,16 @@ const NFTDropPage = () => {
           {/* content  */}
           <div className='flex flex-col text-left leading-tight pb-10'>
             <p className='text-red-100 text-xl font-semibold'>Unevil</p>
-            <p className='text-white font-bold text-[30px] lg:text-[75px]'>The Ultimate NFT Drop Experience</p>
+            <p className='text-white font-bold text-[30px] lg:text-[75px]'>{nft.nftCollectionName}</p>
             <p
               className='text-gray-200 text-lg mt-5'
             >
               Embark on the ultimate NFT drop experience and unlock a world of rare digital treasures, where art, technology, and ownership converge.
             </p>
-            <p className='text-yellow-500 text-xl mx-auto my-10 font-bold'>13 / 21 NFTs claimed</p>
+
+            <ClaimAndMint address={nft.address} />
 
             {/* mint button  */}
-            <button className='sign-in w-full'>Mint NFT (0.01 ETH)</button>
           </div>
         </div>
 
@@ -34,12 +45,12 @@ const NFTDropPage = () => {
               <img
                 className='w-44 rounded-xl object-cover lg:h-[450px] lg:w-[350px]'
                 alt='thumbnail'
-                src='https://media.voguebusiness.com/photos/61b8dfb99ba90ab572dea0bd/2:3/w_1920,c_limit/adidas-nft-voguebus-adidas-nft-dec-21-story.jpg'
+                src={urlFor(nft.mainImage).url()}
               />
             </div>
             <div className='text-center p-5 space-y-2'>
-              <h2 className='text-3xl font-bold text-white'>VAULT Apes</h2>
-              <h2 className='text-lg text-pink-200 font-semibold'>A collection of NFTVault Apes</h2>
+              <h2 className='text-3xl font-bold text-white'>{nft.title}</h2>
+              <h2 className='text-lg text-pink-200 font-semibold'>{nft.description}</h2>
             </div>
           </div>
         </div>
