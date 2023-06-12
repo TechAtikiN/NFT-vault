@@ -29,7 +29,7 @@ const Navbar = () => {
           {address ? 'Sign Out' : 'Sign In'}
         </button>
       </nav>
-      <p className='px-10 font-semibold'>You're logged in with wallet {address?.substring(0, 5)}...{address?.substring(address.length - 5)}</p>
+      <p className='px-10 text-yellow-500 font-semibold'>You're logged in with wallet {address?.substring(0, 5)}...{address?.substring(address.length - 5)}</p>
     </div>
   )
 }
