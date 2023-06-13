@@ -4,8 +4,8 @@ import {visionTool} from '@sanity/vision'
 import schemas from './sanity/schemas'
 
 const config = defineConfig({
-  projectId: 'f8hj1eoj',
-  dataset: 'production',
+  projectId: process.env.SANITY_PROJECT_ID!,
+  dataset: process.env.SANITY_DATASET!,
   title: 'NFTVault',
   apiVersion: '2023-03-04',
   basePath: '/admin',

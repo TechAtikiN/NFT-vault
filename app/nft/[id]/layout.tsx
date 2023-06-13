@@ -1,11 +1,7 @@
-// named exporta
-
-// default exports
 export const metadata = {
   title: 'NFTVault',
   description: 'NFTVault',
 }
-
 export default function RootLayout({
   children,
 }: {

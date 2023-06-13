@@ -1,7 +1,7 @@
 'use client'
-import { useEffect, useState } from "react"
-import { useNFTDrop } from "@thirdweb-dev/react"
-import { BigNumber } from "ethers"
+import { useEffect, useState } from 'react'
+import { useClaimNFT, useContract } from '@thirdweb-dev/react'
+import { BigNumber } from 'ethers'
 
 interface Props {
   address: string
@@ -13,34 +13,24 @@ const ClaimAndMint = ({ address }: Props) => {
   const [price, setPrice] = useState<BigNumber>()
   const [loading, setLoading] = useState<boolean>(true)
 
-  const nftDrop = useNFTDrop(address)
+  const contractAddress = process.env.THIRDWEB_CONTRACT_ADDRESS
+  const tokenId = 0;
+  const { contract } = useContract(contractAddress);
+  const { mutate: claimNft, isLoading, error } = useClaimNFT(contract);
 
-  useEffect(() => {
-    if (!nftDrop) return
+  const mintNft = async () => {
+    // if (!nftDrop || !address) return
 
-    const fetchPrice = async () => {
-      const claimConditions = await nftDrop.claimConditions.getAll()
-      console.log(claimConditions)
-      console.log(price)
-    }
-    fetchPrice()
-  }, [nftDrop])
+    const quantity = 1
 
-  useEffect(() => {
-    if (!nftDrop) return
+    setLoading(true)
 
-    const fetchNftDropData = async () => {
-      setLoading(true)
-      const claimed = await nftDrop.getAllClaimed()
-      const total = await nftDrop.totalSupply()
-
-      setClaimedSupply(claimed.length)
-      setTotalSupply(total)
-      setLoading(false)
-    }
-    fetchNftDropData()
-  }, [nftDrop])
-
+    claimNft({
+      to: address, // Use useAddress hook to get current wallet address
+      quantity: 1,
+      tokenId
+    })
+  }
 
   return (
     <div>
@@ -52,7 +42,9 @@ const ClaimAndMint = ({ address }: Props) => {
           <img className='h-44 w-44 bg-transparent object-contain mx-auto' src='https://i.pinimg.com/originals/49/23/29/492329d446c422b0483677d0318ab4fa.gif' />
         )
       }
+      <button onClick={mintNft}>mint</button>
       <button
+        onClick={mintNft}
         disabled={loading || claimedSupply === totalSupply?.toNumber() || !address}
         className='sign-in disabled:bg-red-100 w-full'
       >
